@@ -5,15 +5,16 @@
     <div class="alert alert-error"><%=@loser%></div>
   <% end %>
 
-<h4><%= session[:player_name] %> is currently playing this Blackjack match!</h4>
-
 <% if @play_again %>
 	<p>
-		<strong>Play again?</strong>
-		<a href="/bet" class="btn btn-primary">Yes</a>
-		<a href="/game_over" class="btn"> No</a>
+		<h6>Do you want to play again?</h6>
+		<br />
+		<a href="/bet" class="btn-large btn-primary">Yes</a>
+		<a href="/game_over" class="btn-large btn-danger">No</a>
 	</p>
 <% end %>
+<br />
+<h4><%= session[:player_name] %> is currently playing this Blackjack match!</h4>
 
 
 	<div class="well">
