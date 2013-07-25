@@ -109,7 +109,7 @@ post '/bet' do
 		@error = "Invalid bet amount"
 		halt erb(:bet)		
 	elsif params[:bet_amount].to_i > session[:player_pot]
-		@error = "You don't have enough money. You have ($#{session[:player_pot]}"
+		@error = "You don't have enough money. You have $#{session[:player_pot]}"
 		halt erb(:bet)
 	else
 		session[:player_bet] = params[:bet_amount].to_i
