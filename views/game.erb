@@ -6,16 +6,24 @@
   <% end %>
 
 <% if @play_again %>
-	<p>
+	<% if session[:player_pot].to_i <= 0 %>
+		<h6>You have no money now!</h6>
+		<br />
+		<a href="/new_player" class="btn-large btn-primary">Recharge money</a>
+		<a href="/game_over" class="btn-large btn-danger">Go home</a>
+		<br />
+		<br />
+	<% else %>
 		<h6>Do you want to play again?</h6>
 		<br />
 		<a href="/bet" class="btn-large btn-primary">Yes</a>
 		<a href="/game_over" class="btn-large btn-danger">No</a>
-	</p>
+		<br />
+		<br />
+	<% end %>
 <% end %>
-<br />
-<h4><%= session[:player_name] %> is currently playing this Blackjack match!</h4>
 
+<h4><%= session[:player_name] %> is currently playing this Blackjack match!</h4>
 
 	<div class="well">
 		<h3>Dealer's cards:</h3>
@@ -28,13 +36,11 @@
 		<% end %>
 
 		<% if @show_dealer_hit_button %>
-			<p>
 				<h4>Dealer has <%= calculate_total(session[:dealer_cards])%> and will hit.</h4>
 				<form id="dealer_hit" action='/game/dealer/hit' method='post'>
 					<input type='submit' class='btn btn-primary' value='See dealer card? &rarr;'>
 				</form>
-			</p>
-		<% end %>
+			<% end %>
 	</div>
 
 

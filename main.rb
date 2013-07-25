@@ -86,13 +86,13 @@ get '/new_player' do
 end
 
 post '/new_player' do
-	
+
 	if params[:player_name].empty?
 		@error = "We need your name in order to let you in"
 		halt erb(:new_player)
 	end
 
-	session[:player_name] = params[:player_name]
+	session[:player_name] = params[:player_name].capitalize
 	redirect '/bet'
 end
 
@@ -105,6 +105,9 @@ post '/bet' do
 	if params[:bet_amount].nil? || params[:bet_amount].to_i == 0
 		@error = "Make a bet or you can't play"
 		halt erb(:bet)
+	elsif params[:bet_amount].to_i < 0
+		@error = "Invalid bet amount"
+		halt erb(:bet)		
 	elsif params[:bet_amount].to_i > session[:player_pot]
 		@error = "You don't have enough money. You have ($#{session[:player_pot]}"
 		halt erb(:bet)
